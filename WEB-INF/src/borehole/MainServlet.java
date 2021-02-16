@@ -98,12 +98,12 @@ public class MainServlet extends HttpServlet
 				if(!got_borehole_state && res.getInt("borehole_log_pump")==1)
 				{
 					got_borehole_state=true;
-					borehole_message=res.getString("borehole_log_message")+" : "+res.getString("log_date");
+					borehole_message=res.getString("borehole_log_message")+" "+res.getString("log_date");
 				}//if.
 				else if(!got_booster_state && res.getInt("borehole_log_pump")==2)
 				{
 					got_booster_state=true;
-					booster_message=res.getString("borehole_log_message")+" : "+res.getString("log_date");
+					booster_message=res.getString("borehole_log_message")+" "+res.getString("log_date");
 				}//else if.
 
 				if(got_booster_state && got_borehole_state)

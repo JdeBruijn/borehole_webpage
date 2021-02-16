@@ -3,6 +3,7 @@ var data_interval=null;
 
 var refresh_wait_time = 1000*60*5;//5 min.
 
+var shown_warning=false;
 
 function getStatusData()
 {
@@ -28,14 +29,14 @@ function getStatusData()
 			{borehole_status_div.style.color="green";}
 			else
 			{borehole_status_div.style.color="red";}
-			borehole_status_div.innerHTML+=data.borehole_status;
+			borehole_status_div.innerHTML="Borehole Status: "+data.borehole_status;
 
 			var booster_status_div = document.getElementById("booster_status");
 			if(data.booster_ok)
 			{booster_status_div.style.color="green";}
 			else
 			{booster_status_div.style.color="red";}
-			booster_status_div.innerHTML+=data.booster_status;
+			booster_status_div.innerHTML="Booster Status: "+data.booster_status;
 		})//then.
 	})//then.
 	.catch(function(error)
@@ -171,9 +172,10 @@ function getWaterLevelGraphData()
 				alert("Error: "+data.message);
 				return;
 			}//if.
-			if(data.message!=null && data.message!="")
+			if(data.message!=null && data.message!="" && !shown_warning)
 			{
 				alert(data.message);
+				shown_warning=true;
 			}//if.
 
 			setupGraph("water_level_graph", "Water Level", data.last_week, data.this_week, data.labels);
